@@ -4,17 +4,29 @@ services:
   actual:
     container_name: actual-budget
     image: actualbudget/actual-server:latest
+    # Keep port for backwards compatibility (optional - can remove later)
     ports:
       - "${ACTUAL_PORT:-5006}:5006"
     env_file:
       - .env
     volumes:
-      # Using relative path for easier repo portability
-      # Data will be in: /home/eduard/homelab/services/actual/data
       - ./data:/data
     restart: unless-stopped
     networks:
       - services_net
+    labels:
+      # Enable Traefik
+      - "traefik.enable=true"
+      
+      # Router configuration
+      - "traefik.http.routers.actual.rule=Host(`budget.${DOMAIN}`)"
+      - "traefik.http.routers.actual.entrypoints=websecure"
+      
+      # Service configuration (tell Traefik which port)
+      - "traefik.http.services.actual.loadbalancer.server.port=5006"
+      
+      # Security headers
+      - "traefik.http.routers.actual.middlewares=secure-headers@file"
     deploy:
       resources:
         limits:
@@ -26,5 +38,4 @@ services:
 
 networks:
   services_net:
-    name: services_net
-    driver: bridge
+    external: true

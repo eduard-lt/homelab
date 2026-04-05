@@ -1,37 +1,37 @@
-# Traefik Static Configuration
+# Traefik Static Configuration for Tailscale
+
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
 
 api:
   dashboard: true
-  insecure: true  # Set to false in production
+  insecure: true  # OK because only accessible via Tailscale
 
 entryPoints:
   web:
     address: ":80"
-    # Redirect to HTTPS (uncomment when SSL is ready)
-    # http:
-    #   redirections:
-    #     entryPoint:
-    #       to: websecure
-    #       scheme: https
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
 
   websecure:
     address: ":443"
-    # Uncomment for SSL
-    # http:
-    #   tls:
-    #     certResolver: letsencrypt
 
 providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
     network: services_net
+  
+  file:
+    filename: /dynamic-config.yml
+    watch: true
 
-# Uncomment for Let's Encrypt SSL
-# certificatesResolvers:
-#   letsencrypt:
-#     acme:
-#       email: your-email@example.com
-#       storage: /acme.json
-#       httpChallenge:
-#         entryPoint: web
+log:
+  level: INFO
+
+accessLog:
+  filePath: "/var/log/access.log"

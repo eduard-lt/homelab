@@ -1,0 +1,23 @@
+# Dynamic configuration for Tailscale certificates
+
+tls:
+  certificates:
+    - certFile: /certs/thedarkurge.tailc19e34.ts.net.crt
+      keyFile: /certs/thedarkurge.tailc19e34.ts.net.key
+  
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/thedarkurge.tailc19e34.ts.net.crt
+        keyFile: /certs/thedarkurge.tailc19e34.ts.net.key
+
+# Security headers middleware
+http:
+  middlewares:
+    secure-headers:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        forceSTSHeader: true
