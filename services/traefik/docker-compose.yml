@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v3.0
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "80:80"     # HTTP
+      - "443:443"   # HTTPS
+      - "8080:8080" # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/traefik.yml:ro
+      - ./acme.json:/acme.json
+    networks:
+      - services_net
+      - media_net
+      - gaming_net
+      - monitoring_net
+    labels:
+      # Dashboard
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=${DASHBOARD_USER}"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+networks:
+  services_net:
+    external: true
+  media_net:
+    external: true
+  gaming_net:
+    external: true
+  monitoring_net:
+    external: true
