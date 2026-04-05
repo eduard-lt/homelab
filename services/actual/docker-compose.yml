@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  actual:
+    container_name: actual-budget
+    image: actualbudget/actual-server:latest
+    ports:
+      - "${ACTUAL_PORT:-5006}:5006"
+    env_file:
+      - .env
+    volumes:
+      # Using relative path for easier repo portability
+      # Data will be in: /home/eduard/homelab/services/actual/data
+      - ./data:/data
+    restart: unless-stopped
+    networks:
+      - services_net
+
+networks:
+  services_net:
+    name: services_net
+    driver: bridge
