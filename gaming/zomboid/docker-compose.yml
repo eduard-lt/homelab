@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  project-zomboid:
+    container_name: pzserver
+    image: pepecitron/projectzomboid-server
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "16261:16261/udp"
+      - "16262:16262/udp"
+      - "27015:27015" # Optional RCON
+    volumes:
+      - /mnt/Data/Zomboid/server-file:/data/server-file
+      - /mnt/Data/Zomboid/config:/data/config
+    networks:
+      - gaming_net
+
+networks:
+  gaming_net:
+    name: gaming_net
+    driver: bridge

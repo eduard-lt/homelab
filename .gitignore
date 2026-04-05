@@ -1,0 +1,88 @@
+# Homelab .gitignore
+
+# Secrets and Environment Files
+.env
+.env.*
+!.env.template
+!.env.example
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
+# Passwords and Secrets
+secrets/
+passwords.txt
+credentials.txt
+
+# Data Directories (only track configs, not data)
+*/data/
+*/appdata/
+*/config/plex/
+*/config/photoprism/
+actual-data/
+persistentdata/
+
+# Logs
+*.log
+logs/
+*/logs/
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Backup Files
+*.bak
+*.backup
+*.old
+backups/
+
+# Docker Volumes (data mounted from host)
+volumes/
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE and Editor
+.vscode/
+.idea/
+*.sublime-*
+
+# OS Files
+.DS_Store
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Node modules (if any)
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+venv/
+env/
+
+# Terraform (if used)
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Ansible (if used)
+*.retry
+
+# Custom exclusions
+nohup.out
+errors
