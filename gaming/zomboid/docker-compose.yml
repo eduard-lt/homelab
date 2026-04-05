@@ -16,6 +16,14 @@ services:
       - /mnt/Data/Zomboid/config:/data/config
     networks:
       - gaming_net
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 6G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
 
 networks:
   gaming_net:

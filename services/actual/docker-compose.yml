@@ -15,6 +15,14 @@ services:
     restart: unless-stopped
     networks:
       - services_net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
 
 networks:
   services_net:

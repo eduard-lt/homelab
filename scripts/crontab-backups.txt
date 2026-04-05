@@ -1,0 +1,17 @@
+# Homelab Backup Cron Jobs
+#
+# Add to your crontab with: crontab -e
+# Or install with: crontab /home/eduard/homelab/scripts/crontab-backups.txt
+#
+
+# Daily backup at 2:00 AM
+0 2 * * * /home/eduard/homelab/scripts/backup.sh daily >> /var/log/homelab-backup.log 2>&1
+
+# Weekly backup at 3:00 AM every Sunday
+0 3 * * 0 /home/eduard/homelab/scripts/backup.sh weekly >> /var/log/homelab-backup.log 2>&1
+
+# Monthly backup at 4:00 AM on the 1st of each month
+0 4 1 * * /home/eduard/homelab/scripts/backup.sh monthly >> /var/log/homelab-backup.log 2>&1
+
+# Docker cleanup - prune unused images/containers weekly at 5 AM Sunday
+0 5 * * 0 /usr/bin/docker system prune -af --volumes=false >> /var/log/docker-cleanup.log 2>&1
