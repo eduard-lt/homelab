@@ -19,8 +19,8 @@ services:
       - ./dynamic-config.yml:/dynamic-config.yml:ro
       - ./acme.json:/acme.json
       # Tailscale SSL certificates
-      - ./thedarkurge.tailc19e34.ts.net.crt:/certs/thedarkurge.tailc19e34.ts.net.crt:ro
-      - ./thedarkurge.tailc19e34.ts.net.key:/certs/thedarkurge.tailc19e34.ts.net.key:ro
+      - ./thedarkurge.li-rattlesnake.ts.net.crt:/certs/thedarkurge.li-rattlesnake.ts.net.crt:ro
+      - ./thedarkurge.li-rattlesnake.ts.net.key:/certs/thedarkurge.li-rattlesnake.ts.net.key:ro
     networks:
       - services_net
       - media_net

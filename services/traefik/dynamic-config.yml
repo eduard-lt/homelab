@@ -2,14 +2,14 @@
 
 tls:
   certificates:
-    - certFile: /certs/thedarkurge.tailc19e34.ts.net.crt
-      keyFile: /certs/thedarkurge.tailc19e34.ts.net.key
+    - certFile: /certs/thedarkurge.li-rattlesnake.ts.net.crt
+      keyFile: /certs/thedarkurge.li-rattlesnake.ts.net.key
   
   stores:
     default:
       defaultCertificate:
-        certFile: /certs/thedarkurge.tailc19e34.ts.net.crt
-        keyFile: /certs/thedarkurge.tailc19e34.ts.net.key
+        certFile: /certs/thedarkurge.li-rattlesnake.ts.net.crt
+        keyFile: /certs/thedarkurge.li-rattlesnake.ts.net.key
 
 # Security headers middleware
 http:

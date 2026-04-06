@@ -18,15 +18,19 @@ services:
       # Enable Traefik
       - "traefik.enable=true"
       
-      # Router configuration
-      - "traefik.http.routers.actual.rule=Host(`budget.${DOMAIN}`)"
+      # Router configuration (accept both domain and IP)
+      - "traefik.http.routers.actual.rule=Host(`budget.${DOMAIN}`) || Host(`100.70.106.23`)"
       - "traefik.http.routers.actual.entrypoints=websecure"
+      - "traefik.http.routers.actual.service=actual"
+      - "traefik.http.routers.actual.tls=true"
       
       # Service configuration (tell Traefik which port)
       - "traefik.http.services.actual.loadbalancer.server.port=5006"
       
-      # Security headers
-      - "traefik.http.routers.actual.middlewares=secure-headers@file"
+      # Security headers needed for SharedArrayBuffer
+      - "traefik.http.routers.actual.middlewares=actual-headers"
+      - "traefik.http.middlewares.actual-headers.headers.customResponseHeaders.Cross-Origin-Embedder-Policy=require-corp"
+      - "traefik.http.middlewares.actual-headers.headers.customResponseHeaders.Cross-Origin-Opener-Policy=same-origin"
     deploy:
       resources:
         limits:
