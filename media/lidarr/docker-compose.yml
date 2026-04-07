@@ -14,6 +14,8 @@ services:
       - /mnt/Data/Apps/Lidarr/cont-init:/custom-cont-init.d
       - /mnt/Data/Music:/music
       - /DATA/Downloads:/downloads
+    ports:
+      - "8686:8686"
     networks:
       - media_net
     deploy:

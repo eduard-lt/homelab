@@ -1,33 +1,51 @@
 {
   "schemaVersion": 2,
   "configProperties": {
-    "name": "default"
+    "name": "Tokyo Night Homelab"
   },
   "categories": [],
   "wrappers": [
     {
-      "id": "default",
+      "id": "media",
+      "name": "Media",
       "position": 0
+    },
+    {
+      "id": "downloads",
+      "name": "Downloads",
+      "position": 1
+    },
+    {
+      "id": "monitoring",
+      "name": "Monitoring",
+      "position": 2
+    },
+    {
+      "id": "management",
+      "name": "Management",
+      "position": 3
     }
   ],
   "apps": [
     {
-      "id": "5df743d9-5cb1-457c-85d2-64ff86855652",
-      "name": "Documentation",
-      "url": "https://homarr.dev",
+      "id": "sonarr",
+      "name": "Sonarr",
+      "url": "http://172.26.1.31:8989",
       "behaviour": {
-        "onClickUrl": "https://homarr.dev",
-        "externalUrl": "https://homarr.dev",
+        "onClickUrl": "http://172.26.1.31:8989",
+        "externalUrl": "http://172.26.1.31:8989",
         "isOpeningNewTab": true
       },
       "network": {
-        "enabledStatusChecker": false,
+        "enabledStatusChecker": true,
         "statusCodes": [
-          "200"
+          "200",
+          "301",
+          "302"
         ]
       },
       "appearance": {
-        "iconUrl": "/imgs/logo/logo.png",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/sonarr.png",
         "appNameStatus": "normal",
         "positionAppName": "column",
         "lineClampAppName": 1
@@ -39,441 +57,341 @@
       "area": {
         "type": "wrapper",
         "properties": {
-          "id": "default"
+          "id": "media"
         }
       },
       "shape": {
         "md": {
-          "location": {
-            "x": 5,
-            "y": 1
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
+          "location": { "x": 0, "y": 0 },
+          "size": { "width": 1, "height": 1 }
         },
         "sm": {
-          "location": {
-            "x": 0,
-            "y": 1
-          },
-          "size": {
-            "width": 1,
-            "height": 2
-          }
+          "location": { "x": 0, "y": 0 },
+          "size": { "width": 1, "height": 1 }
         },
         "lg": {
-          "location": {
-            "x": 6,
-            "y": 1
-          },
-          "size": {
-            "width": 2,
-            "height": 2
-          }
+          "location": { "x": 0, "y": 0 },
+          "size": { "width": 1, "height": 1 }
         }
       }
     },
     {
-      "id": "47af36c0-47c1-4e5b-bfc7-ad645ee6a337",
-      "name": "Discord",
-      "url": "https://discord.com/invite/aCsmEV5RgA",
+      "id": "radarr",
+      "name": "Radarr",
+      "url": "http://172.26.1.31:7878",
       "behaviour": {
-        "onClickUrl": "https://discord.com/invite/aCsmEV5RgA",
-        "isOpeningNewTab": true,
-        "externalUrl": "https://discord.com/invite/aCsmEV5RgA",
-        "tooltipDescription": "Join our Discord server! We're waiting for your ideas and feedback. "
+        "onClickUrl": "http://172.26.1.31:7878",
+        "externalUrl": "http://172.26.1.31:7878",
+        "isOpeningNewTab": true
       },
       "network": {
-        "enabledStatusChecker": false,
-        "statusCodes": [
-          "200"
-        ]
+        "enabledStatusChecker": true,
+        "statusCodes": ["200", "301", "302"]
       },
       "appearance": {
-        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/png/discord.png",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/radarr.png",
         "appNameStatus": "normal",
-        "positionAppName": "row-reverse",
+        "positionAppName": "column",
         "lineClampAppName": 1
       },
-      "integration": {
-        "type": null,
-        "properties": []
-      },
-      "area": {
-        "type": "wrapper",
-        "properties": {
-          "id": "default"
-        }
-      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "media" } },
       "shape": {
-        "md": {
-          "location": {
-            "x": 3,
-            "y": 1
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "sm": {
-          "location": {
-            "x": 1,
-            "y": 4
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "lg": {
-          "location": {
-            "x": 4,
-            "y": 0
-          },
-          "size": {
-            "width": 2,
-            "height": 1
-          }
-        }
+        "md": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } }
       }
     },
     {
-      "id": "47af36c0-47c1-4e5b-bfc7-ad645ee6a330",
-      "name": "Contribute",
-      "url": "https://github.com/ajnart/homarr",
+      "id": "lidarr",
+      "name": "Lidarr",
+      "url": "http://172.26.1.31:8686",
       "behaviour": {
-        "onClickUrl": "https://github.com/ajnart/homarr",
-        "externalUrl": "https://github.com/ajnart/homarr",
-        "isOpeningNewTab": true,
-        "tooltipDescription": ""
+        "onClickUrl": "http://172.26.1.31:8686",
+        "externalUrl": "http://172.26.1.31:8686",
+        "isOpeningNewTab": true
       },
-      "network": {
-        "enabledStatusChecker": false,
-        "statusCodes": []
-      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
       "appearance": {
-        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/png/github.png",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/lidarr.png",
         "appNameStatus": "normal",
-        "positionAppName": "row-reverse",
-        "lineClampAppName": 2
-      },
-      "integration": {
-        "type": null,
-        "properties": []
-      },
-      "area": {
-        "type": "wrapper",
-        "properties": {
-          "id": "default"
-        }
-      },
-      "shape": {
-        "md": {
-          "location": {
-            "x": 3,
-            "y": 2
-          },
-          "size": {
-            "width": 2,
-            "height": 1
-          }
-        },
-        "sm": {
-          "location": {
-            "x": 1,
-            "y": 3
-          },
-          "size": {
-            "width": 2,
-            "height": 1
-          }
-        },
-        "lg": {
-          "location": {
-            "x": 2,
-            "y": 0
-          },
-          "size": {
-            "width": 2,
-            "height": 1
-          }
-        }
-      }
-    },
-    {
-      "id": "47af36c0-47c1-4e5b-bfc7-ad645ee6a990",
-      "name": "Donate",
-      "url": "https://ko-fi.com/ajnart",
-      "behaviour": {
-        "onClickUrl": "https://ko-fi.com/ajnart",
-        "externalUrl": "https://ko-fi.com/ajnart",
-        "isOpeningNewTab": true,
-        "tooltipDescription": "Please consider making a donation"
-      },
-      "network": {
-        "enabledStatusChecker": false,
-        "statusCodes": [
-          "200"
-        ]
-      },
-      "appearance": {
-        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/png/ko-fi.png",
-        "appNameStatus": "normal",
-        "positionAppName": "row-reverse",
+        "positionAppName": "column",
         "lineClampAppName": 1
       },
-      "integration": {
-        "type": null,
-        "properties": []
-      },
-      "area": {
-        "type": "wrapper",
-        "properties": {
-          "id": "default"
-        }
-      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "media" } },
       "shape": {
-        "md": {
-          "location": {
-            "x": 4,
-            "y": 1
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "sm": {
-          "location": {
-            "x": 2,
-            "y": 4
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "lg": {
-          "location": {
-            "x": 6,
-            "y": 0
-          },
-          "size": {
-            "width": 2,
-            "height": 1
-          }
-        }
+        "md": { "location": { "x": 2, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 0, "y": 1 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 2, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "readarr",
+      "name": "Readarr",
+      "url": "http://172.26.1.31:8787",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31:8787",
+        "externalUrl": "http://172.26.1.31:8787",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/readarr.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "media" } },
+      "shape": {
+        "md": { "location": { "x": 3, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 1, "y": 1 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 3, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "overseerr",
+      "name": "Overseerr",
+      "url": "http://172.26.1.31:5055",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31:5055",
+        "externalUrl": "http://172.26.1.31:5055",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/overseerr.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "media" } },
+      "shape": {
+        "md": { "location": { "x": 4, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 0, "y": 2 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 4, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "tautulli",
+      "name": "Tautulli",
+      "url": "http://172.26.1.31:8181",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31:8181",
+        "externalUrl": "http://172.26.1.31:8181",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/tautulli.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "media" } },
+      "shape": {
+        "md": { "location": { "x": 5, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 1, "y": 2 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 5, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "prowlarr",
+      "name": "Prowlarr",
+      "url": "http://172.26.1.31:9696",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31:9696",
+        "externalUrl": "http://172.26.1.31:9696",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/prowlarr.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "downloads" } },
+      "shape": {
+        "md": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "qbittorrent",
+      "name": "qBittorrent",
+      "url": "http://172.26.1.31:8081",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31:8081",
+        "externalUrl": "http://172.26.1.31:8081",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/qbittorrent.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "downloads" } },
+      "shape": {
+        "md": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana",
+      "url": "http://172.26.1.31:3003",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31:3003",
+        "externalUrl": "http://172.26.1.31:3003",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/grafana.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "monitoring" } },
+      "shape": {
+        "md": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "netdata",
+      "name": "Netdata",
+      "url": "http://172.26.1.31:19999",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31:19999",
+        "externalUrl": "http://172.26.1.31:19999",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/netdata.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "monitoring" } },
+      "shape": {
+        "md": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "actual",
+      "name": "Actual Budget",
+      "url": "http://172.26.1.31:5006",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31:5006",
+        "externalUrl": "http://172.26.1.31:5006",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/actual-budget.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "management" } },
+      "shape": {
+        "md": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 0, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "portainer",
+      "name": "Portainer",
+      "url": "https://172.26.1.31:9443",
+      "behaviour": {
+        "onClickUrl": "https://172.26.1.31:9443",
+        "externalUrl": "https://172.26.1.31:9443",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/portainer.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "management" } },
+      "shape": {
+        "md": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 1, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "traefik",
+      "name": "Traefik Dashboard",
+      "url": "http://100.70.106.23:9080/dashboard/",
+      "behaviour": {
+        "onClickUrl": "http://100.70.106.23:9080/dashboard/",
+        "externalUrl": "http://100.70.106.23:9080/dashboard/",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/traefik.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "management" } },
+      "shape": {
+        "md": { "location": { "x": 2, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 0, "y": 1 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 2, "y": 0 }, "size": { "width": 1, "height": 1 } }
+      }
+    },
+    {
+      "id": "casaos",
+      "name": "CasaOS",
+      "url": "http://172.26.1.31",
+      "behaviour": {
+        "onClickUrl": "http://172.26.1.31",
+        "externalUrl": "http://172.26.1.31",
+        "isOpeningNewTab": true
+      },
+      "network": { "enabledStatusChecker": true, "statusCodes": ["200", "301", "302"] },
+      "appearance": {
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/casaos.png",
+        "appNameStatus": "normal",
+        "positionAppName": "column",
+        "lineClampAppName": 1
+      },
+      "integration": { "type": null, "properties": [] },
+      "area": { "type": "wrapper", "properties": { "id": "management" } },
+      "shape": {
+        "md": { "location": { "x": 3, "y": 0 }, "size": { "width": 1, "height": 1 } },
+        "sm": { "location": { "x": 1, "y": 1 }, "size": { "width": 1, "height": 1 } },
+        "lg": { "location": { "x": 3, "y": 0 }, "size": { "width": 1, "height": 1 } }
       }
     }
   ],
-  "widgets": [
-    {
-      "id": "e3004052-6b83-480e-b458-56e8ccdca5f0",
-      "type": "weather",
-      "properties": {
-        "displayInFahrenheit": false,
-        "location": {
-          "name": "Paris",
-          "latitude": 48.85341,
-          "longitude": 2.3488
-        },
-        "displayCityName": true
-      },
-      "area": {
-        "type": "wrapper",
-        "properties": {
-          "id": "default"
-        }
-      },
-      "shape": {
-        "md": {
-          "location": {
-            "x": 5,
-            "y": 0
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "sm": {
-          "location": {
-            "x": 2,
-            "y": 0
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "lg": {
-          "location": {
-            "x": 0,
-            "y": 0
-          },
-          "size": {
-            "width": 2,
-            "height": 1
-          }
-        }
-      }
-    },
-    {
-      "id": "971aa859-8570-49a1-8d34-dd5c7b3638d1",
-      "type": "date",
-      "properties": {
-        "display24HourFormat": true,
-        "dateFormat": "hide",
-        "enableTimezone": false,
-        "timezoneLocation": {
-          "name": "Paris",
-          "latitude": 48.85341,
-          "longitude": 2.3488
-        },
-        "titleState": "city"
-      },
-      "area": {
-        "type": "wrapper",
-        "properties": {
-          "id": "default"
-        }
-      },
-      "shape": {
-        "sm": {
-          "location": {
-            "x": 1,
-            "y": 0
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "md": {
-          "location": {
-            "x": 4,
-            "y": 0
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "lg": {
-          "location": {
-            "x": 8,
-            "y": 0
-          },
-          "size": {
-            "width": 2,
-            "height": 1
-          }
-        }
-      }
-    },
-    {
-      "id": "f252768d-9e69-491b-b6b4-8cad04fa30e8",
-      "type": "date",
-      "properties": {
-        "display24HourFormat": true,
-        "dateFormat": "hide",
-        "enableTimezone": true,
-        "timezoneLocation": {
-          "name": "Tokyo",
-          "latitude": 35.6895,
-          "longitude": 139.69171
-        },
-        "titleState": "city"
-      },
-      "area": {
-        "type": "wrapper",
-        "properties": {
-          "id": "default"
-        }
-      },
-      "shape": {
-        "sm": {
-          "location": {
-            "x": 0,
-            "y": 0
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "md": {
-          "location": {
-            "x": 3,
-            "y": 0
-          },
-          "size": {
-            "width": 1,
-            "height": 1
-          }
-        },
-        "lg": {
-          "location": {
-            "x": 8,
-            "y": 1
-          },
-          "size": {
-            "width": 2,
-            "height": 1
-          }
-        }
-      }
-    },
-    {
-      "id": "86b1921f-efa7-410f-92dd-79553bf3264d",
-      "type": "notebook",
-      "properties": {
-        "showToolbar": true,
-        "content": "<h2><strong>Welcome to Homarr 🚀👋</strong></h2><p>We're glad that you're here! Homarr is a <em>modern </em>and <em>easy to use</em> dashboard that helps you to <strong>organize and manage</strong> your home network from one place. Control is <strong>at your fingertips</strong>.</p><p>We recommend you to read the <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://homarr.dev/docs/getting-started/after-the-installation\">getting started guide</a> first. To edit this board you must enter the edit mode - only administrators can do this. Adding an app is the first step you should take. You can do this by clicking the <code>Add tile</code> button at the top right and select <code>App</code>. After you provided an internal URL, external URL and selected an icon you can drag it around when holding down the left mouse button. Make it bigger or smaller using the drag icon at the bottom right. When you're happy with it's position, you <strong>must exit edit mode to save your board</strong>. Adding widgets works the same way but may require additional configuration - read the documentation for more information.</p><p>To remove this widget, you must log in to your administrator account and click on the menu to delete it.</p><p><strong><u>Your TODO list:</u></strong></p><ul data-type=\"taskList\"><li data-checked=\"false\" data-type=\"taskItem\"><label><input type=\"checkbox\"><span></span></label><div><p>Read the <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://homarr.dev\">documentation</a></p></div></li><li data-checked=\"false\" data-type=\"taskItem\"><label><input type=\"checkbox\"><span></span></label><div><p>Add your <em>first app</em></p></div></li><li data-checked=\"false\" data-type=\"taskItem\"><label><input type=\"checkbox\"><span></span></label><div><p><em>Resize </em>and <em>drag</em> your app to a different position</p></div></li><li data-checked=\"false\" data-type=\"taskItem\"><label><input type=\"checkbox\"><span></span></label><div><p>Add the <em>clock widget</em> to your dashboard</p></div></li><li data-checked=\"false\" data-type=\"taskItem\"><label><input type=\"checkbox\"><span></span></label><div><p>Create a <em>new user</em></p></div></li></ul>"
-      },
-      "area": {
-        "type": "wrapper",
-        "properties": {
-          "id": "default"
-        }
-      },
-      "shape": {
-        "sm": {
-          "location": {
-            "x": 0,
-            "y": 0
-          },
-          "size": {
-            "width": 3,
-            "height": 2
-          }
-        },
-        "md": {
-          "location": {
-            "x": 0,
-            "y": 0
-          },
-          "size": {
-            "width": 3,
-            "height": 4
-          }
-        },
-        "lg": {
-          "location": {
-            "x": 0,
-            "y": 1
-          },
-          "size": {
-            "width": 6,
-            "height": 3
-          }
-        }
-      }
-    }
-  ],
+  "widgets": [],
   "settings": {
     "common": {
       "searchEngine": {
@@ -483,28 +401,41 @@
     },
     "customization": {
       "layout": {
-        "enabledLeftSidebar": false,
-        "enabledRightSidebar": false,
-        "enabledDocker": false,
-        "enabledPing": false,
-        "enabledSearchbar": true
+        "enabledDocker": true,
+        "enabledPing": true,
+        "enabledRightSidebar": true,
+        "enabledLeftSidebar": false
       },
-      "pageTitle": "Homarr ⭐️",
-      "logoImageUrl": "/imgs/logo/logo.png",
-      "faviconUrl": "/imgs/favicon/favicon-squared.png",
+      "pageTitle": "Tokyo Night Homelab",
+      "logoImageUrl": "",
+      "faviconUrl": "",
       "backgroundImageUrl": "",
-      "customCss": "",
+      "customCss": "body{background:linear-gradient(135deg,#1a1b26 0%,#16161e 100%);} .app-card{border:1px solid #3b4261;box-shadow:0 0 0 1px rgba(122,162,247,.15);} .app-card:hover{border-color:#7aa2f7;box-shadow:0 0 20px rgba(122,162,247,.25);} .wrapper-title{color:#7aa2f7 !important;letter-spacing:.4px;}",
       "colors": {
-        "primary": "red",
-        "secondary": "yellow",
-        "shade": 7
+        "primary": "#7aa2f7",
+        "secondary": "#bb9af7",
+        "shade": {
+          "0": "#1a1b26",
+          "1": "#16161e",
+          "2": "#24283b",
+          "3": "#414868",
+          "4": "#565f89",
+          "5": "#c0caf5",
+          "6": "#a9b1d6",
+          "7": "#9aa5ce",
+          "8": "#cfc9c2",
+          "9": "#ffffff"
+        }
       },
-      "appOpacity": 100,
+      "appOpacity": 98,
       "gridstack": {
-        "columnCountSmall": 3,
-        "columnCountMedium": 6,
-        "columnCountLarge": 10
-      }
+        "itemHeight": 88,
+        "margin": 12
+      },
+      "backgroundImageAttachment": "fixed",
+      "backgroundImageRepeat": "no-repeat",
+      "backgroundImageSize": "cover",
+      "metaTitle": "Tokyo Night Homelab"
     },
     "access": {
       "allowGuests": false

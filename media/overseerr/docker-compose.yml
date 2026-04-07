@@ -13,6 +13,8 @@ services:
       - /DATA/AppData/overseerr/config:/config
       - /mnt/Data/Plex/Movies:/movies
       - /mnt/Data/Plex/TV:/tv
+    ports:
+      - "5055:5055"
     networks:
       - media_net
     deploy:

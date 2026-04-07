@@ -11,6 +11,8 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - /DATA/AppData/tautulli/config:/config
+    ports:
+      - "8181:8181"
     networks:
       - media_net
     deploy:
