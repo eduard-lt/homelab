@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  qbittorrent:
+    image: hotio/qbittorrent:release-5.0.1
+    container_name: qbittorrent
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+      - UMASK=002
+    volumes:
+      - /DATA/AppData/qbittorrent/config:/config
+      - /DATA:/DATA
+    networks:
+      - media_net
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          memory: 512M
+    labels:
+      - "traefik.enable=true"
+      - 'traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.thedarkurge.li-rattlesnake.ts.net`) || Host(`100.70.106.23`)'
+      - "traefik.http.routers.qbittorrent.entrypoints=websecure"
+      - "traefik.http.routers.qbittorrent.tls=true"
+      - "traefik.http.routers.qbittorrent.service=qbittorrent"
+      - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
+
+networks:
+  media_net:
+    external: true

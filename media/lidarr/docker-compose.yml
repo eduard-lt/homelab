@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  lidarr:
+    image: linuxserver/lidarr:1.4.5
+    container_name: lidarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /DATA/AppData/lidarr/config:/config
+      - /mnt/Data/Apps/Lidarr/cont-init:/custom-cont-init.d
+      - /mnt/Data/Music:/music
+      - /DATA/Downloads:/downloads
+    networks:
+      - media_net
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          memory: 256M
+    labels:
+      - "traefik.enable=true"
+      - 'traefik.http.routers.lidarr.rule=Host(`lidarr.thedarkurge.li-rattlesnake.ts.net`) || Host(`100.70.106.23`)'
+      - "traefik.http.routers.lidarr.entrypoints=websecure"
+      - "traefik.http.routers.lidarr.tls=true"
+      - "traefik.http.routers.lidarr.service=lidarr"
+      - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
+
+networks:
+  media_net:
+    external: true
