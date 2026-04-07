@@ -1,0 +1,105 @@
+═══════════════════════════════════════════════════════════
+                🤖 GUIDE 1: CREATE DISCORD BOT
+═══════════════════════════════════════════════════════════
+
+1. Open this URL: https://discord.com/developers/applications
+
+2. Click "New Application" button
+   - Name: "Homelab Manager" (or your choice)
+   - Click "Create"
+
+3. Go to "Bot" tab (left sidebar)
+   - Click "Add Bot" → "Yes, do it!"
+   - Click "Reset Token" → "Yes, do it!"
+   - **COPY THE TOKEN AND SAVE IT** ⚠️ Important!
+
+4. Scroll down to "Privileged Gateway Intents"
+   - ✅ Turn ON "MESSAGE CONTENT INTENT"
+   - ✅ Turn ON "SERVER MEMBERS INTENT"
+   - Click "Save Changes"
+
+5. Go to "OAuth2" → "URL Generator" (left sidebar)
+   - Under SCOPES, check:
+     ✅ bot
+     ✅ applications.commands
+   - Under BOT PERMISSIONS, check:
+     ✅ Send Messages
+     ✅ Embed Links
+     ✅ Read Message History
+     ✅ Use Slash Commands
+
+6. Copy the "GENERATED URL" at the bottom
+   - Open it in a new tab
+   - Select your Discord server
+   - Click "Authorize"
+
+7. Bot should now appear in your server (offline until we deploy it)
+
+═══════════════════════════════════════════════════════════
+                📊 GUIDE 2: CONFIGURE GRAFANA
+═══════════════════════════════════════════════════════════
+
+1. Open: https://100.70.106.23:8443
+
+2. When you see service list, click on "Grafana"
+
+3. Login (default: admin/admin, change if prompted)
+
+4. Click "Alerting" menu (left sidebar, bell icon)
+
+5. Click "Contact points"
+
+6. Click "Add contact point" button
+
+7. Fill in:
+   Name: Discord Homelab
+   Integration: Webhook
+   URL: https://discord.com/api/webhooks/1491141708472385641/qVjC2FhBtnEFEVdxtFhrfaJmu5myEbj_47omWfgiYRgOs_Jk2fFjjgHu4p7qMxm4UPOW
+   HTTP Method: POST
+
+8. Click "Test" - you should see message in Discord!
+
+9. Click "Save contact point"
+
+═══════════════════════════════════════════════════════════
+              🎬 GUIDE 3: CONFIGURE OVERSEERR
+═══════════════════════════════════════════════════════════
+
+1. Open: https://100.70.106.23:8443
+
+2. When you see service list, click on "Overseerr"
+
+3. Login with your credentials
+
+4. Click Settings ⚙️ (top right corner)
+
+5. Click "Notifications" in left sidebar
+
+6. Click on "Discord" option
+
+7. Click "Add Discord Agent"
+
+8. Fill in:
+   Enable Agent: ✅ Turn ON
+   Webhook URL: https://discord.com/api/webhooks/1491141708472385641/qVjC2FhBtnEFEVdxtFhrfaJmu5myEbj_47omWfgiYRgOs_Jk2fFjjgHu4p7qMxm4UPOW
+
+9. Check ALL notification types:
+   ✅ Media Requested
+   ✅ Media Approved
+   ✅ Media Available
+   ✅ Media Failed
+   ✅ Issue Created
+   (and all others)
+
+10. Click "Test" - you should see message in Discord!
+
+11. Click "Save Changes"
+
+═══════════════════════════════════════════════════════════
+
+WHEN YOU'RE DONE:
+- Tell me if Grafana and Overseerr tests worked
+- Give me your Discord bot token
+- I'll deploy the bot!
+
+═══════════════════════════════════════════════════════════
