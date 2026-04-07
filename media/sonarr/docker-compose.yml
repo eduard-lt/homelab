@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /DATA/AppData/sonarr/config:/config
+      - /mnt/Data/Plex/TvShows:/tv
+      - /mnt/Data/Downloads:/downloads
+    # Keep port for backwards compatibility
+    ports:
+      - "8989:8989"
+    networks:
+      - media_net
+    labels:
+      # Enable Traefik
+      - "traefik.enable=true"
+      
+      # Router configuration (accept both domain and IP)
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)"
+      - "traefik.http.routers.sonarr.entrypoints=websecure"
+      - "traefik.http.routers.sonarr.service=sonarr"
+      - "traefik.http.routers.sonarr.tls=true"
+      
+      # Service configuration
+      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1G
+
+networks:
+  media_net:
+    external: true
