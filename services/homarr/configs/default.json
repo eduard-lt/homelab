@@ -411,22 +411,6 @@
       "faviconUrl": "",
       "backgroundImageUrl": "",
       "customCss": "body{background:linear-gradient(135deg,#1a1b26 0%,#16161e 100%);} .app-card{border:1px solid #3b4261;box-shadow:0 0 0 1px rgba(122,162,247,.15);} .app-card:hover{border-color:#7aa2f7;box-shadow:0 0 20px rgba(122,162,247,.25);} .wrapper-title{color:#7aa2f7 !important;letter-spacing:.4px;}",
-      "colors": {
-        "primary": "#7aa2f7",
-        "secondary": "#bb9af7",
-        "shade": {
-          "0": "#1a1b26",
-          "1": "#16161e",
-          "2": "#24283b",
-          "3": "#414868",
-          "4": "#565f89",
-          "5": "#c0caf5",
-          "6": "#a9b1d6",
-          "7": "#9aa5ce",
-          "8": "#cfc9c2",
-          "9": "#ffffff"
-        }
-      },
       "appOpacity": 98,
       "gridstack": {
         "itemHeight": 88,
