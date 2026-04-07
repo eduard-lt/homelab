@@ -12,6 +12,8 @@ services:
       - ./data:/data
     environment:
       - TZ=Europe/Amsterdam
+    ports:
+      - "7575:7575"
     networks:
       - services_net
     deploy:
