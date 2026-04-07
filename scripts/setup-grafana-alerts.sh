@@ -1,0 +1,33 @@
+#!/bin/bash
+set -e
+
+GRAFANA_URL="http://100.70.106.23:3000"
+DISCORD_WEBHOOK="https://discord.com/api/webhooks/1491141708472385641/qVjC2FhBtnEFEVdxtFhrfaJmu5myEbj_47omWfgiYRgOs_Jk2fFjjgHu4p7qMxm4UPOW"
+
+echo "🔧 Setting up Grafana Discord Notifications..."
+echo ""
+echo "⚠️  This script requires manual setup via Grafana UI"
+echo ""
+echo "📋 Follow these steps:"
+echo ""
+echo "1. Access Grafana: https://100.70.106.23:8443 (select Grafana route)"
+echo "2. Login with your credentials"
+echo "3. Go to: Alerting → Contact points → New contact point"
+echo "4. Configure:"
+echo "   - Name: Discord Homelab"
+echo "   - Integration: Webhook"
+echo "   - URL: $DISCORD_WEBHOOK"
+echo "   - HTTP Method: POST"
+echo "5. Click 'Test' to verify"
+echo "6. Save"
+echo ""
+echo "📊 Recommended Alert Rules to Create:"
+echo ""
+echo "- High CPU Usage (>80% for 5+ minutes)"
+echo "- High Memory Usage (>85%)"
+echo "- Low Disk Space (<10% free)"
+echo "- Container Down/Unhealthy"
+echo "- Docker Daemon Issues"
+echo ""
+echo "See docs/DISCORD-NOTIFICATIONS.md for detailed instructions"
+
