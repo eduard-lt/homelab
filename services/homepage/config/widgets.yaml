@@ -21,11 +21,18 @@
     uptime: true
     units: metric
     refresh: 3000
+    label: System (/)
+
+- resources:
+    label: Data Storage
+    disk: /DATA
+    units: metric
+    refresh: 5000
 
 - openmeteo:
-    label: Amsterdam
-    latitude: 52.37
-    longitude: 4.89
-    timezone: Europe/Amsterdam
+    label: Brașov
+    latitude: 45.6525
+    longitude: 25.6069
+    timezone: Europe/Bucharest
     units: metric
     cache: 5

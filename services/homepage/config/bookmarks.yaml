@@ -1,9 +1,13 @@
 ---
 - Network:
-    - Router:
+    - ISP Router:
         - icon: router.png
-          href: http://192.168.1.1
-          description: Router
+          href: http://172.26.1.1
+          description: Internet Provider Router
+    - DD-WRT Router:
+        - icon: router.png
+          href: http://172.26.1.2
+          description: DD-WRT Router
 
 - External:
     - GitHub:
