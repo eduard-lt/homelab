@@ -41,7 +41,17 @@ services:
     - io.casaos.v1.app.store.id=0
     - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/icon.png
     - web=8787
-    - host=100.70.106.23:8787
+    - host=172.26.1.31:8787
 networks:
   media_net:
     external: true
+x-casaos:
+  store_app_id: readarr
+  title:
+    en_us: Readarr
+  main: readarr
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/icon.png
+  port_map: '8787'
+  scheme: http
+  index: /
+  is_uncontrolled: false

@@ -39,7 +39,17 @@ services:
     - io.casaos.v1.app.store.id=0
     - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/icon.png
     - web=8181
-    - host=100.70.106.23:8181
+    - host=172.26.1.31:8181
 networks:
   media_net:
     external: true
+x-casaos:
+  store_app_id: tautulli
+  title:
+    en_us: Tautulli
+  main: tautulli
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/icon.png
+  port_map: '8181'
+  scheme: http
+  index: /
+  is_uncontrolled: false

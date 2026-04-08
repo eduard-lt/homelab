@@ -57,3 +57,13 @@ networks:
     external: true
   monitoring_net:
     external: true
+x-casaos:
+  store_app_id: traefik
+  title:
+    en_us: Traefik
+  main: traefik
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Traefik/icon.png
+  port_map: '9080'
+  scheme: http
+  index: /
+  is_uncontrolled: false

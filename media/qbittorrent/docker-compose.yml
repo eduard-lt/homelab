@@ -41,7 +41,17 @@ services:
     - io.casaos.v1.app.store.id=0
     - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/icon.png
     - web=8081
-    - host=100.70.106.23:8081
+    - host=172.26.1.31:8081
 networks:
   media_net:
     external: true
+x-casaos:
+  store_app_id: qbittorrent
+  title:
+    en_us: qBittorrent
+  main: qbittorrent
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/icon.png
+  port_map: '8081'
+  scheme: http
+  index: /
+  is_uncontrolled: false

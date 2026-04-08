@@ -82,12 +82,16 @@ register_all_apps() {
     log_info "Scanning for all docker-compose apps in $HOMELAB_BASE"
     
     local count=0
+    local ts
+    ts="$(date +%s)"
     
     # Media apps
     for app in sonarr radarr lidarr readarr prowlarr overseerr tautulli qbittorrent; do
         local compose_file="$HOMELAB_BASE/media/$app/docker-compose.yml"
         if [[ -f "$compose_file" ]]; then
-            register_app "$app" "$compose_file" && ((count++))
+            if register_app "$app" "$compose_file"; then
+                count=$((count + 1))
+            fi
         fi
     done
     
@@ -95,14 +99,34 @@ register_all_apps() {
     for app in grafana netdata; do
         local compose_file="$HOMELAB_BASE/monitoring/$app/docker-compose.yml"
         if [[ -f "$compose_file" ]]; then
-            register_app "$app" "$compose_file" && ((count++))
+            if register_app "$app" "$compose_file"; then
+                count=$((count + 1))
+            fi
         fi
     done
     
-    # Services
-    register_app "actual-budget" "$HOMELAB_BASE/services/actual/docker-compose.yml" && ((count++))
-    register_app "traefik" "$HOMELAB_BASE/services/traefik/docker-compose.yml" && ((count++))
-    register_app "discord-bot" "$HOMELAB_BASE/services/discord-bot/docker-compose.yml" && ((count++))
+    # Services (register only if compose exists)
+    if [[ -f "$HOMELAB_BASE/services/actual/docker-compose.yml" ]]; then
+        if register_app "actual-budget" "$HOMELAB_BASE/services/actual/docker-compose.yml"; then
+            count=$((count + 1))
+        fi
+    else
+        log_warn "Skipping actual-budget: compose file missing"
+    fi
+    if [[ -f "$HOMELAB_BASE/services/traefik/docker-compose.yml" ]]; then
+        if register_app "traefik" "$HOMELAB_BASE/services/traefik/docker-compose.yml"; then
+            count=$((count + 1))
+        fi
+    else
+        log_warn "Skipping traefik: compose file missing"
+    fi
+    if [[ -f "$HOMELAB_BASE/services/discord-bot/docker-compose.yml" ]]; then
+        if register_app "discord-bot" "$HOMELAB_BASE/services/discord-bot/docker-compose.yml"; then
+            count=$((count + 1))
+        fi
+    else
+        log_warn "Skipping discord-bot: compose file missing"
+    fi
     
     log_info "Registered $count apps"
 }

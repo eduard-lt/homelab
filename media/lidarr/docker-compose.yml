@@ -42,7 +42,17 @@ services:
     - io.casaos.v1.app.store.id=0
     - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/icon.png
     - web=8686
-    - host=100.70.106.23:8686
+    - host=172.26.1.31:8686
 networks:
   media_net:
     external: true
+x-casaos:
+  store_app_id: lidarr
+  title:
+    en_us: Lidarr
+  main: lidarr
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/icon.png
+  port_map: '8686'
+  scheme: http
+  index: /
+  is_uncontrolled: false

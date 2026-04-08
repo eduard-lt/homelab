@@ -31,7 +31,7 @@ services:
     - io.casaos.v1.app.store.id=0
     - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.png
     - web=9696
-    - host=100.70.106.23:9696
+    - host=172.26.1.31:9696
     deploy:
       resources:
         limits:
@@ -40,3 +40,13 @@ services:
 networks:
   media_net:
     external: true
+x-casaos:
+  store_app_id: prowlarr
+  title:
+    en_us: Prowlarr
+  main: prowlarr
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.png
+  port_map: '9696'
+  scheme: http
+  index: /
+  is_uncontrolled: false

@@ -1,0 +1,65 @@
+networks:
+  gaming_net:
+    external: true
+    name: gaming_net
+  media_net:
+    external: true
+    name: media_net
+  monitoring_net:
+    external: true
+    name: monitoring_net
+  services_net:
+    external: true
+    name: services_net
+services:
+  traefik:
+    container_name: traefik
+    deploy:
+      resources:
+        limits:
+          cpus: 1.0
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+    environment:
+      DASHBOARD_USER: admin:$$$$apr1$$$$8oJF3QAT$$$$zL36vWL6x5/QBvMpFYFWk1
+      DOMAIN: thedarkurge.li-rattlesnake.ts.net
+    image: traefik:v3.0
+    labels:
+      casaos: casaos
+      custom_id: 9db0b1d7-4881-40d3-a1e2-177e3b9a78d2
+      desc: Modern HTTP reverse proxy and load balancer
+      host: 100.70.106.23:8080
+      icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Traefik/icon.png
+      io.casaos.v1.app.store.id: '0'
+      name: traefik
+      origin: local
+      protocol: http
+      show_env: casaos
+      traefik.enable: "true"
+      traefik.http.middlewares.auth.basicauth.users: admin:$$$$apr1$$$$8oJF3QAT$$$$zL36vWL6x5/QBvMpFYFWk1
+      traefik.http.routers.dashboard.entrypoints: websecure
+      traefik.http.routers.dashboard.middlewares: auth
+      traefik.http.routers.dashboard.rule: Host(`traefik.thedarkurge.li-rattlesnake.ts.net`)
+      traefik.http.routers.dashboard.service: api@internal
+      web: '8080'
+    networks:
+      gaming_net: null
+      media_net: null
+      monitoring_net: null
+      services_net: null
+    ports:
+    - 100.70.106.23:8080:80/tcp
+    - 100.70.106.23:8443:443/tcp
+    - 100.70.106.23:9080:8080/tcp
+    restart: unless-stopped
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /home/eduard/homelab/services/traefik/traefik.yml:/traefik.yml:ro
+    - /home/eduard/homelab/services/traefik/dynamic-config.yml:/dynamic-config.yml:ro
+    - /home/eduard/homelab/services/traefik/acme.json:/acme.json:rw
+    - /home/eduard/homelab/services/traefik/thedarkurge.li-rattlesnake.ts.net.crt:/certs/thedarkurge.li-rattlesnake.ts.net.crt:ro
+    - /home/eduard/homelab/services/traefik/thedarkurge.li-rattlesnake.ts.net.key:/certs/thedarkurge.li-rattlesnake.ts.net.key:ro
+version: '3.8'
+

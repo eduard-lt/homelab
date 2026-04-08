@@ -37,7 +37,7 @@ services:
     - io.casaos.v1.app.store.id=0
     - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Netdata/icon.png
     - web=19999
-    - host=100.70.106.23:19999
+    - host=172.26.1.31:19999
     deploy:
       resources:
         limits:
@@ -46,3 +46,13 @@ services:
 networks:
   monitoring_net:
     external: true
+x-casaos:
+  store_app_id: netdata
+  title:
+    en_us: Netdata
+  main: netdata
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Netdata/icon.png
+  port_map: '19999'
+  scheme: http
+  index: /
+  is_uncontrolled: false

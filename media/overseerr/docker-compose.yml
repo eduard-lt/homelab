@@ -39,9 +39,19 @@ services:
     - protocol=http
     - show_env=casaos
     - io.casaos.v1.app.store.id=0
-    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseer/icon.png
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/icon.png
     - web=5055
-    - host=100.70.106.23:5055
+    - host=172.26.1.31:5055
 networks:
   media_net:
     external: true
+x-casaos:
+  store_app_id: overseerr
+  title:
+    en_us: Overseerr
+  main: overseerr
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/icon.png
+  port_map: '5055'
+  scheme: http
+  index: /
+  is_uncontrolled: false

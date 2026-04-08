@@ -33,7 +33,7 @@ services:
     - io.casaos.v1.app.store.id=0
     - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/icon.png
     - web=7878
-    - host=100.70.106.23:7878
+    - host=172.26.1.31:7878
     deploy:
       resources:
         limits:
@@ -42,3 +42,13 @@ services:
 networks:
   media_net:
     external: true
+x-casaos:
+  store_app_id: radarr
+  title:
+    en_us: Radarr
+  main: radarr
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/icon.png
+  port_map: "7878"
+  scheme: http
+  index: /
+  is_uncontrolled: false

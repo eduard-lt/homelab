@@ -26,7 +26,7 @@ ICON_URLS = {
     'lidarr': 'https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/icon.png',
     'readarr': 'https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/icon.png',
     'prowlarr': 'https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.png',
-    'overseerr': 'https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseer/icon.png',
+    'overseerr': 'https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/icon.png',
     'tautulli': 'https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/icon.png',
     'qbittorrent': 'https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/icon.png',
     'grafana': 'https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/icon.png',
@@ -67,8 +67,9 @@ DEFAULT_PORTS = {
     'traefik': 9080,  # Dashboard
 }
 
-# Tailscale IP (from environment or default)
-TAILSCALE_IP = os.getenv('TAILSCALE_IP', '100.70.106.23')
+# LAN IP for CasaOS (from environment or default)
+# Note: CasaOS needs LAN IP for click-through, not Tailscale IP
+LAN_IP = os.getenv('LAN_IP', '172.26.1.31')
 
 
 class CasaOSLabeler:
@@ -157,7 +158,7 @@ class CasaOSLabeler:
         # Add web/host if port available
         if port:
             labels.append(f"web={port}")
-            labels.append(f"host={TAILSCALE_IP}:{port}")
+            labels.append(f"host={LAN_IP}:{port}")
         
         return labels
     
