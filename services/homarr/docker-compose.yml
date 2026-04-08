@@ -11,6 +11,7 @@ services:
     environment:
       - TZ=Europe/Amsterdam
       - SECRET_ENCRYPTION_KEY=b79db3071ea50afc6aea479a45523254fca7b158993d07c9d7f736c414d00962
+      - BASE_URL=http://172.26.1.31:7575
     ports:
       - "7575:7575"
     networks:
