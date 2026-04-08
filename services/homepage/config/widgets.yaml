@@ -1,0 +1,31 @@
+---
+- logo:
+    icon: https://gethomepage.dev/img/logo.png
+
+- search:
+    provider: google
+    target: _blank
+
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: long
+      timeStyle: short
+      hour12: false
+
+- resources:
+    cpu: true
+    memory: true
+    disk: /
+    cputemp: true
+    uptime: true
+    units: metric
+    refresh: 3000
+
+- openmeteo:
+    label: Amsterdam
+    latitude: 52.37
+    longitude: 4.89
+    timezone: Europe/Amsterdam
+    units: metric
+    cache: 5
