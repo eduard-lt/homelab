@@ -1,35 +1,44 @@
-version: "3.8"
-
+version: '3.8'
 services:
   radarr:
     container_name: radarr
     image: linuxserver/radarr:latest
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Amsterdam
     volumes:
-      - /DATA/AppData/radarr/config:/config
-      - /mnt/Data/Plex/Movies:/movies
-      - /mnt/Data/Downloads:/downloads
+    - /DATA/AppData/radarr/config:/config
+    - /mnt/Data/Plex/Movies:/movies
+    - /mnt/Data/Downloads:/downloads
     ports:
-      - "7878:7878"
+    - 7878:7878
     networks:
-      - media_net
+    - media_net
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.radarr.rule=Host(`radarr.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)"
-      - "traefik.http.routers.radarr.entrypoints=websecure"
-      - "traefik.http.routers.radarr.service=radarr"
-      - "traefik.http.routers.radarr.tls=true"
-      - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+    - traefik.enable=true
+    - traefik.http.routers.radarr.rule=Host(`radarr.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)
+    - traefik.http.routers.radarr.entrypoints=websecure
+    - traefik.http.routers.radarr.service=radarr
+    - traefik.http.routers.radarr.tls=true
+    - traefik.http.services.radarr.loadbalancer.server.port=7878
+    - casaos=casaos
+    - custom_id=4c3a04c4-531f-46cb-96a9-989fb2cfaf2b
+    - origin=local
+    - name=radarr
+    - desc=Movie collection manager and downloader
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/icon.png
+    - web=7878
+    - host=100.70.106.23:7878
     deploy:
       resources:
         limits:
           cpus: '2.0'
           memory: 1G
-
 networks:
   media_net:
     external: true

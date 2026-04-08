@@ -1,33 +1,42 @@
-version: "3.8"
-
+version: '3.8'
 services:
   prowlarr:
     container_name: prowlarr
     image: linuxserver/prowlarr:latest
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Amsterdam
     volumes:
-      - /DATA/AppData/prowlarr/config:/config
+    - /DATA/AppData/prowlarr/config:/config
     ports:
-      - "9696:9696"
+    - 9696:9696
     networks:
-      - media_net
+    - media_net
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)"
-      - "traefik.http.routers.prowlarr.entrypoints=websecure"
-      - "traefik.http.routers.prowlarr.service=prowlarr"
-      - "traefik.http.routers.prowlarr.tls=true"
-      - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
+    - traefik.enable=true
+    - traefik.http.routers.prowlarr.rule=Host(`prowlarr.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)
+    - traefik.http.routers.prowlarr.entrypoints=websecure
+    - traefik.http.routers.prowlarr.service=prowlarr
+    - traefik.http.routers.prowlarr.tls=true
+    - traefik.http.services.prowlarr.loadbalancer.server.port=9696
+    - casaos=casaos
+    - custom_id=4250b114-19a7-415b-a302-ecc3b19f2c50
+    - origin=local
+    - name=prowlarr
+    - desc=Indexer manager for *arr apps
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.png
+    - web=9696
+    - host=100.70.106.23:9696
     deploy:
       resources:
         limits:
           cpus: '1.0'
           memory: 512M
-
 networks:
   media_net:
     external: true

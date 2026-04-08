@@ -1,20 +1,19 @@
 version: '3.8'
-
 services:
   tautulli:
     image: linuxserver/tautulli:2.13.2
     container_name: tautulli
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Amsterdam
     volumes:
-      - /DATA/AppData/tautulli/config:/config
+    - /DATA/AppData/tautulli/config:/config
     ports:
-      - "8181:8181"
+    - 8181:8181
     networks:
-      - media_net
+    - media_net
     deploy:
       resources:
         limits:
@@ -23,13 +22,24 @@ services:
         reservations:
           memory: 128M
     labels:
-      - "traefik.enable=true"
-      - 'traefik.http.routers.tautulli.rule=Host(`tautulli.thedarkurge.li-rattlesnake.ts.net`) || Host(`100.70.106.23`)'
-      - "traefik.http.routers.tautulli.entrypoints=websecure"
-      - "traefik.http.routers.tautulli.tls=true"
-      - "traefik.http.routers.tautulli.service=tautulli"
-      - "traefik.http.services.tautulli.loadbalancer.server.port=8181"
-
+    - traefik.enable=true
+    - traefik.http.routers.tautulli.rule=Host(`tautulli.thedarkurge.li-rattlesnake.ts.net`)
+      || Host(`100.70.106.23`)
+    - traefik.http.routers.tautulli.entrypoints=websecure
+    - traefik.http.routers.tautulli.tls=true
+    - traefik.http.routers.tautulli.service=tautulli
+    - traefik.http.services.tautulli.loadbalancer.server.port=8181
+    - casaos=casaos
+    - custom_id=f11fdb5f-4a1f-457b-a772-b597971f3702
+    - origin=local
+    - name=tautulli
+    - desc=Plex monitoring and tracking
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/icon.png
+    - web=8181
+    - host=100.70.106.23:8181
 networks:
   media_net:
     external: true

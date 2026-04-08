@@ -1,22 +1,21 @@
 version: '3.8'
-
 services:
   qbittorrent:
     image: hotio/qbittorrent:release-5.0.1
     container_name: qbittorrent
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
-      - UMASK=002
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Amsterdam
+    - UMASK=002
     volumes:
-      - /DATA/AppData/qbittorrent/config:/config
-      - /DATA:/DATA
+    - /DATA/AppData/qbittorrent/config:/config
+    - /DATA:/DATA
     ports:
-      - "8081:8080"
+    - 8081:8080
     networks:
-      - media_net
+    - media_net
     deploy:
       resources:
         limits:
@@ -25,13 +24,24 @@ services:
         reservations:
           memory: 512M
     labels:
-      - "traefik.enable=true"
-      - 'traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.thedarkurge.li-rattlesnake.ts.net`) || Host(`100.70.106.23`)'
-      - "traefik.http.routers.qbittorrent.entrypoints=websecure"
-      - "traefik.http.routers.qbittorrent.tls=true"
-      - "traefik.http.routers.qbittorrent.service=qbittorrent"
-      - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
-
+    - traefik.enable=true
+    - traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.thedarkurge.li-rattlesnake.ts.net`)
+      || Host(`100.70.106.23`)
+    - traefik.http.routers.qbittorrent.entrypoints=websecure
+    - traefik.http.routers.qbittorrent.tls=true
+    - traefik.http.routers.qbittorrent.service=qbittorrent
+    - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
+    - casaos=casaos
+    - custom_id=b1a18fa8-a2fc-457b-a596-c89dd2d89bfc
+    - origin=local
+    - name=qbittorrent
+    - desc=BitTorrent client with web interface
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/icon.png
+    - web=8081
+    - host=100.70.106.23:8081
 networks:
   media_net:
     external: true

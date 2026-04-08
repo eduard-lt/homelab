@@ -1,31 +1,40 @@
-version: "3.8"
-
+version: '3.8'
 services:
   grafana:
     container_name: grafana
     image: grafana/grafana:latest
     restart: unless-stopped
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+    - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
     volumes:
-      - /DATA/AppData/grafana:/var/lib/grafana
+    - /DATA/AppData/grafana:/var/lib/grafana
     ports:
-      - "3003:3000"
+    - 3003:3000
     networks:
-      - monitoring_net
+    - monitoring_net
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)"
-      - "traefik.http.routers.grafana.entrypoints=websecure"
-      - "traefik.http.routers.grafana.service=grafana"
-      - "traefik.http.routers.grafana.tls=true"
-      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+    - traefik.enable=true
+    - traefik.http.routers.grafana.rule=Host(`grafana.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)
+    - traefik.http.routers.grafana.entrypoints=websecure
+    - traefik.http.routers.grafana.service=grafana
+    - traefik.http.routers.grafana.tls=true
+    - traefik.http.services.grafana.loadbalancer.server.port=3000
+    - casaos=casaos
+    - custom_id=a1bf622d-5396-4b8b-bbbe-5b258c69484d
+    - origin=local
+    - name=grafana
+    - desc=Metrics visualization and dashboards
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/icon.png
+    - web=3003
+    - host=100.70.106.23:3003
     deploy:
       resources:
         limits:
           cpus: '1.0'
           memory: 512M
-
 networks:
   monitoring_net:
     external: true

@@ -1,39 +1,45 @@
-version: "3.8"
-
+version: '3.8'
 services:
   traefik:
     container_name: traefik
     image: traefik:v3.0
     restart: unless-stopped
     env_file:
-      - .env
+    - .env
     ports:
-      # Bind to Tailscale IP only (not public internet)
-      # Using 8080/8443 instead of 80/443 (CasaOS uses 80)
-      - "100.70.106.23:8080:80"     # HTTP (Tailscale only)
-      - "100.70.106.23:8443:443"    # HTTPS (Tailscale only)
-      - "100.70.106.23:9080:8080"   # Dashboard (Tailscale only)
+    - 100.70.106.23:8080:80
+    - 100.70.106.23:8443:443
+    - 100.70.106.23:9080:8080
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.yml:/traefik.yml:ro
-      - ./dynamic-config.yml:/dynamic-config.yml:ro
-      - ./acme.json:/acme.json
-      # Tailscale SSL certificates
-      - ./thedarkurge.li-rattlesnake.ts.net.crt:/certs/thedarkurge.li-rattlesnake.ts.net.crt:ro
-      - ./thedarkurge.li-rattlesnake.ts.net.key:/certs/thedarkurge.li-rattlesnake.ts.net.key:ro
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - ./traefik.yml:/traefik.yml:ro
+    - ./dynamic-config.yml:/dynamic-config.yml:ro
+    - ./acme.json:/acme.json
+    - ./thedarkurge.li-rattlesnake.ts.net.crt:/certs/thedarkurge.li-rattlesnake.ts.net.crt:ro
+    - ./thedarkurge.li-rattlesnake.ts.net.key:/certs/thedarkurge.li-rattlesnake.ts.net.key:ro
     networks:
-      - services_net
-      - media_net
-      - gaming_net
-      - monitoring_net
+    - services_net
+    - media_net
+    - gaming_net
+    - monitoring_net
     labels:
-      # Dashboard
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN}`)"
-      - "traefik.http.routers.dashboard.service=api@internal"
-      - "traefik.http.routers.dashboard.entrypoints=websecure"
-      - "traefik.http.routers.dashboard.middlewares=auth"
-      - "traefik.http.middlewares.auth.basicauth.users=${DASHBOARD_USER}"
+    - traefik.enable=true
+    - traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN}`)
+    - traefik.http.routers.dashboard.service=api@internal
+    - traefik.http.routers.dashboard.entrypoints=websecure
+    - traefik.http.routers.dashboard.middlewares=auth
+    - traefik.http.middlewares.auth.basicauth.users=${DASHBOARD_USER}
+    - casaos=casaos
+    - custom_id=9db0b1d7-4881-40d3-a1e2-177e3b9a78d2
+    - origin=local
+    - name=traefik
+    - desc=Modern HTTP reverse proxy and load balancer
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Traefik/icon.png
+    - web=8080
+    - host=100.70.106.23:8080
     deploy:
       resources:
         limits:
@@ -42,7 +48,6 @@ services:
         reservations:
           cpus: '0.25'
           memory: 128M
-
 networks:
   services_net:
     external: true

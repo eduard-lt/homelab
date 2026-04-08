@@ -1,17 +1,16 @@
 version: '3.8'
-
 services:
   discord-bot:
     build: .
     container_name: discord-bot
     restart: unless-stopped
     environment:
-      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+    - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./bot.py:/app/bot.py:ro
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - ./bot.py:/app/bot.py:ro
     networks:
-      - services_net
+    - services_net
     deploy:
       resources:
         limits:
@@ -19,7 +18,15 @@ services:
           memory: 256M
         reservations:
           memory: 128M
-
+    labels:
+    - casaos=casaos
+    - custom_id=f8ac1007-2986-4b86-9f37-39fbdc8e5184
+    - origin=local
+    - name=discord-bot
+    - desc=discord-bot service
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
 networks:
   services_net:
     external: true

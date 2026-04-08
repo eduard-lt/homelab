@@ -1,36 +1,37 @@
-version: "3.8"
-
+version: '3.8'
 services:
   actual:
     container_name: actual-budget
     image: actualbudget/actual-server:latest
-    # Keep port for backwards compatibility (optional - can remove later)
     ports:
-      - "${ACTUAL_PORT:-5006}:5006"
+    - ${ACTUAL_PORT:-5006}:5006
     env_file:
-      - .env
+    - .env
     volumes:
-      - ./data:/data
+    - ./data:/data
     restart: unless-stopped
     networks:
-      - services_net
+    - services_net
     labels:
-      # Enable Traefik
-      - "traefik.enable=true"
-      
-      # Router configuration (accept both domain and IP)
-      - "traefik.http.routers.actual.rule=Host(`budget.${DOMAIN}`) || Host(`100.70.106.23`)"
-      - "traefik.http.routers.actual.entrypoints=websecure"
-      - "traefik.http.routers.actual.service=actual"
-      - "traefik.http.routers.actual.tls=true"
-      
-      # Service configuration (tell Traefik which port)
-      - "traefik.http.services.actual.loadbalancer.server.port=5006"
-      
-      # Security headers needed for SharedArrayBuffer
-      - "traefik.http.routers.actual.middlewares=actual-headers"
-      - "traefik.http.middlewares.actual-headers.headers.customResponseHeaders.Cross-Origin-Embedder-Policy=require-corp"
-      - "traefik.http.middlewares.actual-headers.headers.customResponseHeaders.Cross-Origin-Opener-Policy=same-origin"
+    - traefik.enable=true
+    - traefik.http.routers.actual.rule=Host(`budget.${DOMAIN}`) || Host(`100.70.106.23`)
+    - traefik.http.routers.actual.entrypoints=websecure
+    - traefik.http.routers.actual.service=actual
+    - traefik.http.routers.actual.tls=true
+    - traefik.http.services.actual.loadbalancer.server.port=5006
+    - traefik.http.routers.actual.middlewares=actual-headers
+    - traefik.http.middlewares.actual-headers.headers.customResponseHeaders.Cross-Origin-Embedder-Policy=require-corp
+    - traefik.http.middlewares.actual-headers.headers.customResponseHeaders.Cross-Origin-Opener-Policy=same-origin
+    - casaos=casaos
+    - custom_id=65dc5a82-36d2-4a28-a718-9b20511a4263
+    - origin=local
+    - name=actual-budget
+    - desc=actual-budget service
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - web=5006
+    - host=100.70.106.23:5006
     deploy:
       resources:
         limits:
@@ -39,7 +40,6 @@ services:
         reservations:
           cpus: '0.1'
           memory: 128M
-
 networks:
   services_net:
     external: true

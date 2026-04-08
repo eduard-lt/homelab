@@ -1,22 +1,21 @@
 version: '3.8'
-
 services:
   overseerr:
     image: linuxserver/overseerr:1.33.2
     container_name: overseerr
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Amsterdam
     volumes:
-      - /DATA/AppData/overseerr/config:/config
-      - /mnt/Data/Plex/Movies:/movies
-      - /mnt/Data/Plex/TV:/tv
+    - /DATA/AppData/overseerr/config:/config
+    - /mnt/Data/Plex/Movies:/movies
+    - /mnt/Data/Plex/TV:/tv
     ports:
-      - "5055:5055"
+    - 5055:5055
     networks:
-      - media_net
+    - media_net
     deploy:
       resources:
         limits:
@@ -25,13 +24,24 @@ services:
         reservations:
           memory: 256M
     labels:
-      - "traefik.enable=true"
-      - 'traefik.http.routers.overseerr.rule=Host(`overseerr.thedarkurge.li-rattlesnake.ts.net`) || Host(`100.70.106.23`)'
-      - "traefik.http.routers.overseerr.entrypoints=websecure"
-      - "traefik.http.routers.overseerr.tls=true"
-      - "traefik.http.routers.overseerr.service=overseerr"
-      - "traefik.http.services.overseerr.loadbalancer.server.port=5055"
-
+    - traefik.enable=true
+    - traefik.http.routers.overseerr.rule=Host(`overseerr.thedarkurge.li-rattlesnake.ts.net`)
+      || Host(`100.70.106.23`)
+    - traefik.http.routers.overseerr.entrypoints=websecure
+    - traefik.http.routers.overseerr.tls=true
+    - traefik.http.routers.overseerr.service=overseerr
+    - traefik.http.services.overseerr.loadbalancer.server.port=5055
+    - casaos=casaos
+    - custom_id=0205278d-edab-4481-b678-a275fb588931
+    - origin=local
+    - name=overseerr
+    - desc=Media request and discovery platform
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseer/icon.png
+    - web=5055
+    - host=100.70.106.23:5055
 networks:
   media_net:
     external: true

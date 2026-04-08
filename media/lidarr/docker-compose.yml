@@ -1,23 +1,22 @@
 version: '3.8'
-
 services:
   lidarr:
     image: linuxserver/lidarr:1.4.5
     container_name: lidarr
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Amsterdam
     volumes:
-      - /DATA/AppData/lidarr/config:/config
-      - /mnt/Data/Apps/Lidarr/cont-init:/custom-cont-init.d
-      - /mnt/Data/Music:/music
-      - /DATA/Downloads:/downloads
+    - /DATA/AppData/lidarr/config:/config
+    - /mnt/Data/Apps/Lidarr/cont-init:/custom-cont-init.d
+    - /mnt/Data/Music:/music
+    - /DATA/Downloads:/downloads
     ports:
-      - "8686:8686"
+    - 8686:8686
     networks:
-      - media_net
+    - media_net
     deploy:
       resources:
         limits:
@@ -26,13 +25,24 @@ services:
         reservations:
           memory: 256M
     labels:
-      - "traefik.enable=true"
-      - 'traefik.http.routers.lidarr.rule=Host(`lidarr.thedarkurge.li-rattlesnake.ts.net`) || Host(`100.70.106.23`)'
-      - "traefik.http.routers.lidarr.entrypoints=websecure"
-      - "traefik.http.routers.lidarr.tls=true"
-      - "traefik.http.routers.lidarr.service=lidarr"
-      - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
-
+    - traefik.enable=true
+    - traefik.http.routers.lidarr.rule=Host(`lidarr.thedarkurge.li-rattlesnake.ts.net`)
+      || Host(`100.70.106.23`)
+    - traefik.http.routers.lidarr.entrypoints=websecure
+    - traefik.http.routers.lidarr.tls=true
+    - traefik.http.routers.lidarr.service=lidarr
+    - traefik.http.services.lidarr.loadbalancer.server.port=8686
+    - casaos=casaos
+    - custom_id=eb93673a-8d72-4711-b5f8-c9094ab234f7
+    - origin=local
+    - name=lidarr
+    - desc=Music collection manager
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/icon.png
+    - web=8686
+    - host=100.70.106.23:8686
 networks:
   media_net:
     external: true

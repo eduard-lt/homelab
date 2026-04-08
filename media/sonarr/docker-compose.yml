@@ -1,41 +1,44 @@
-version: "3.8"
-
+version: '3.8'
 services:
   sonarr:
     container_name: sonarr
     image: linuxserver/sonarr:latest
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Amsterdam
     volumes:
-      - /DATA/AppData/sonarr/config:/config
-      - /mnt/Data/Plex/TvShows:/tv
-      - /mnt/Data/Downloads:/downloads
-    # Keep port for backwards compatibility
+    - /DATA/AppData/sonarr/config:/config
+    - /mnt/Data/Plex/TvShows:/tv
+    - /mnt/Data/Downloads:/downloads
     ports:
-      - "8989:8989"
+    - 8989:8989
     networks:
-      - media_net
+    - media_net
     labels:
-      # Enable Traefik
-      - "traefik.enable=true"
-      
-      # Router configuration (accept both domain and IP)
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)"
-      - "traefik.http.routers.sonarr.entrypoints=websecure"
-      - "traefik.http.routers.sonarr.service=sonarr"
-      - "traefik.http.routers.sonarr.tls=true"
-      
-      # Service configuration
-      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+    - traefik.enable=true
+    - traefik.http.routers.sonarr.rule=Host(`sonarr.${DOMAIN}`) || Host(`${TAILSCALE_IP}`)
+    - traefik.http.routers.sonarr.entrypoints=websecure
+    - traefik.http.routers.sonarr.service=sonarr
+    - traefik.http.routers.sonarr.tls=true
+    - traefik.http.services.sonarr.loadbalancer.server.port=8989
+    - casaos=casaos
+    - custom_id=4c3bfc7f-a84b-4503-9673-aa3cc7cca28e
+    - origin=local
+    - name=sonarr
+    - desc=TV series management and automation
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/icon.png
+    - web=8989
+    - host=100.70.106.23:8989
     deploy:
       resources:
         limits:
           cpus: '2.0'
           memory: 1G
-
 networks:
   media_net:
     external: true

@@ -1,22 +1,21 @@
 version: '3.8'
-
 services:
   readarr:
     image: linuxserver/readarr:0.3.10-develop
     container_name: readarr
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Amsterdam
     volumes:
-      - /DATA/AppData/readarr/config:/config
-      - /mnt/Data/Books:/books
-      - /DATA/Downloads:/downloads
+    - /DATA/AppData/readarr/config:/config
+    - /mnt/Data/Books:/books
+    - /DATA/Downloads:/downloads
     ports:
-      - "8787:8787"
+    - 8787:8787
     networks:
-      - media_net
+    - media_net
     deploy:
       resources:
         limits:
@@ -25,13 +24,24 @@ services:
         reservations:
           memory: 256M
     labels:
-      - "traefik.enable=true"
-      - 'traefik.http.routers.readarr.rule=Host(`readarr.thedarkurge.li-rattlesnake.ts.net`) || Host(`100.70.106.23`)'
-      - "traefik.http.routers.readarr.entrypoints=websecure"
-      - "traefik.http.routers.readarr.tls=true"
-      - "traefik.http.routers.readarr.service=readarr"
-      - "traefik.http.services.readarr.loadbalancer.server.port=8787"
-
+    - traefik.enable=true
+    - traefik.http.routers.readarr.rule=Host(`readarr.thedarkurge.li-rattlesnake.ts.net`)
+      || Host(`100.70.106.23`)
+    - traefik.http.routers.readarr.entrypoints=websecure
+    - traefik.http.routers.readarr.tls=true
+    - traefik.http.routers.readarr.service=readarr
+    - traefik.http.services.readarr.loadbalancer.server.port=8787
+    - casaos=casaos
+    - custom_id=879e491e-057c-4f72-84bb-f34583ea546c
+    - origin=local
+    - name=readarr
+    - desc=Book and audiobook collection manager
+    - protocol=http
+    - show_env=casaos
+    - io.casaos.v1.app.store.id=0
+    - icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/icon.png
+    - web=8787
+    - host=100.70.106.23:8787
 networks:
   media_net:
     external: true

@@ -1,0 +1,50 @@
+networks:
+  services_net:
+    external: true
+    name: services_net
+services:
+  actual:
+    container_name: actual-budget
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    environment:
+      ACTUAL_PORT: '5006'
+      DOMAIN: thedarkurge.li-rattlesnake.ts.net
+    image: actualbudget/actual-server:latest
+    labels:
+      casaos: casaos
+      custom_id: 65dc5a82-36d2-4a28-a718-9b20511a4263
+      desc: actual-budget service
+      host: 100.70.106.23:5006
+      io.casaos.v1.app.store.id: '0'
+      name: actual-budget
+      origin: local
+      protocol: http
+      show_env: casaos
+      traefik.enable: "true"
+      traefik.http.middlewares.actual-headers.headers.customResponseHeaders.Cross-Origin-Embedder-Policy: require-corp
+      traefik.http.middlewares.actual-headers.headers.customResponseHeaders.Cross-Origin-Opener-Policy: same-origin
+      traefik.http.routers.actual.entrypoints: websecure
+      traefik.http.routers.actual.middlewares: actual-headers
+      traefik.http.routers.actual.rule: Host(`budget.thedarkurge.li-rattlesnake.ts.net`)
+        || Host(`100.70.106.23`)
+      traefik.http.routers.actual.service: actual
+      traefik.http.routers.actual.tls: "true"
+      traefik.http.services.actual.loadbalancer.server.port: '5006'
+      web: '5006'
+    networks:
+      services_net: null
+    ports:
+    - published: 5006
+      target: 5006
+    restart: unless-stopped
+    volumes:
+    - /home/eduard/homelab/services/actual/data:/data:rw
+version: '3.8'
+
